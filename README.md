@@ -1,0 +1,1 @@
+# QuickScribe---TextSummarizer
