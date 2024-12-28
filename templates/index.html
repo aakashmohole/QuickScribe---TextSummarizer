@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Summarization Project</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Summarization Page -->
+  <section id="home" class="p-10 bg-gradient-to-r from-[#C08497] to-[#F3EEC3] text-gray-800">
+    <header class="mb-8 text-center">
+      <h1 class="text-3xl font-bold">Welcome to QuickScribe</h1>
+      <p class="text-gray-600">Start summarizing your texts below.</p>
+    </header>
+
+    <div class="bg-[#B0D0D3] rounded-lg shadow-lg p-6 max-w-2xl mx-auto">
+      <form method="POST" action="/index">
+        <div class="mb-4">
+          <label for="text-input" class="block text-[#C08497] font-semibold">Enter Text:</label>
+          <textarea id="text-input" name="text" rows="5" class="w-full mt-2 p-3 border rounded-lg focus:ring focus:ring-[#F7AF9D]" placeholder="Paste your text here..."></textarea>
+        </div>
+        <button type="submit" class="w-full px-6 py-3 bg-[#C08497] text-white font-bold rounded-lg hover:bg-[#F7AF9D]">
+          Summarize
+        </button>
+      </form>
+
+      <div class="mt-6 bg-[#F3EEC3] p-4 rounded-lg">
+        <h2 class="text-[#C08497] font-bold mb-10">Summary:</h2>
+        <p id="response-area" class="text-gray-700">{{ summary }}</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

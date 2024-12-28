@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to QuickScribe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Landing Page -->
+  <section class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#B0D0D3] to-[#F3EEC3] text-gray-800">
+    <header class="text-center">
+      <h1 class="text-5xl font-bold mb-4">Text Summarization Made Easy with <br><br>QuickScribe</h1>
+      <p class="text-lg">Simplify lengthy texts into concise summaries with just a click.</p>
+    </header>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10  mx-10 my-10">
+      <div class="bg-[#F7E3AF] text-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
+        <h2 class="text-xl font-bold mb-2">Accurate Summaries</h2>
+        <p>Get the essence of your text without missing key details.</p>
+      </div>
+      <div class="bg-[#C08497] text-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
+        <h2 class="text-xl font-bold mb-2">Fast Processing</h2>
+        <p>Summarize large documents in seconds with our AI-powered tool.</p>
+      </div>
+      <div class="bg-[#F7AF9D] text-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform">
+        <h2 class="text-xl font-bold mb-2">User-Friendly</h2>
+        <p>An intuitive interface designed for ease of use.</p>
+      </div>
+    </div>
+
+    <button class="mt-10 px-8 py-3 bg-[#C08497] text-white font-semibold rounded-lg shadow-lg hover:bg-[#F7AF9D] transform hover:scale-105 transition-transform">
+        <a href="{{ url_for('index') }}">Get Started</a>
+    </button>
+  </section>
+
+</body>
+</html>
