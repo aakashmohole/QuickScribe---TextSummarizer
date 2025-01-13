@@ -3,23 +3,11 @@
 QuickScribe is a simple and efficient text summarization tool that helps to condense lengthy text into shorter, more meaningful summaries. This project is designed for individuals and organizations who deal with large amounts of textual data and need quick insights.
 
 ---
-
-## Features
-
-- **Text Input Options:** Input text directly or upload files (e.g., .txt, .pdf).
-- **Language Support:** Works with multiple languages.
-- **Summarization Types:** Choose between extractive or abstractive summarization.
-- **Custom Length:** Define the desired summary length.
-- **User-Friendly Interface:** Simple and intuitive design for easy use.
-
----
-
 ## Tech Stack
 
 - **Backend:** Python, Flask
 - **Frontend:** HTML, CSS, JavaScript
 - **Natural Language Processing (NLP):** Hugging Face Transformers, NLTK
-- **Deployment:** Docker, AWS/GCP
 
 ---
 
@@ -49,10 +37,7 @@ QuickScribe is a simple and efficient text summarization tool that helps to cond
 
 Here’s a quick demo of QuickScribe in action:
 
-<video controls width="600">
-  <source src="demo_video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[![QuickScribe Banner](https://github.com/aakashmohole/NeuraFlow-Hack2Hire/blob/main/images/NeuraFlow1.png)]([https://www.youtube.com/watch?v=70tGXwfVML0](https://youtu.be/uzBu6GNcnkA))
 
 ---
 
@@ -84,12 +69,6 @@ Contributions are welcome! To contribute:
     git push origin feature-name
     ```
 5. Create a pull request.
-
----
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
