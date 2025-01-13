@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Summarization</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/5968/5968703.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-purple-100 to-purple-200 min-h-screen flex flex-col">
+  <header class="bg-purple-600 text-white py-4 shadow-md">
+    <div class="container mx-auto px-4 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">QuickScribe</h1>
+    </div>
+  </header>
+
+  <main class="flex-grow flex items-center justify-center">
+    <div class="max-w-2xl w-full bg-white shadow-lg rounded-xl p-8 fade-in">
+      <h1 class="text-3xl font-extrabold text-purple-700 text-center mb-6">Summarize Your Text</h1>
+      <form class="space-y-4" id="summarize-form">
+        <div>
+          <label for="text" class="block text-sm font-medium text-gray-700">Enter Text</label>
+          <textarea id="text" name="text" rows="5" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm p-3" placeholder="Paste your text here..."></textarea>
+        </div>
+        <button type="button" id="submit-btn" class="w-full bg-purple-600 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-purple-700 focus:ring-4 focus:ring-purple-400 transition duration-300">Summarize</button>
+      </form>
+
+      <!-- Loading Spinner -->
+      <div id="loading-spinner" class="hidden flex justify-center items-center mt-4">
+        <div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-600"></div>
+      </div>
+
+      <div id="summary-container" class="mt-6 hidden fade-in">
+        <h2 class="text-xl font-semibold text-gray-800">Summary:</h2>
+        <p id="summary-text" class="mt-2 bg-gray-100 p-4 rounded-lg shadow-inner text-gray-700"></p>
+      </div>
+
+      <div id="response-label" class="mt-4 text-red-600 hidden"></div>
+    </div>
+  </main>
+
+  <footer class="bg-gray-800 text-white py-4 mt-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="text-sm">&copy; 2025 Text Summarization Tool. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('submit-btn').addEventListener('click', async () => {
+      const text = document.getElementById('text').value.trim();
+      const summaryContainer = document.getElementById('summary-container');
+      const summaryText = document.getElementById('summary-text');
+      const responseLabel = document.getElementById('response-label');
+      const loadingSpinner = document.getElementById('loading-spinner');
+
+      if (!text) {
+        responseLabel.textContent = "Please enter some text to summarize.";
+        responseLabel.classList.remove('hidden');
+        return;
+      }
+
+      responseLabel.classList.add('hidden');
+      summaryContainer.classList.add('hidden');
+      loadingSpinner.classList.remove('hidden'); // Show spinner
+
+      try {
+        const response = await fetch('/summarize', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          summaryText.textContent = data.summary;
+          summaryContainer.classList.remove('hidden');
+        } else {
+          responseLabel.textContent = data.error || "An unexpected error occurred.";
+          responseLabel.classList.remove('hidden');
+        }
+      } catch (error) {
+        responseLabel.textContent = "An error occurred while summarizing the text.";
+        responseLabel.classList.remove('hidden');
+      } finally {
+        loadingSpinner.classList.add('hidden'); // Hide spinner
+      }
+    });
+  </script>
+</body>
+</html>
