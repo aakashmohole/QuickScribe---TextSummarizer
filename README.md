@@ -37,7 +37,7 @@ QuickScribe is a simple and efficient text summarization tool that helps to cond
 
 Here’s a quick demo of QuickScribe in action:
 
-[![QuickScribe Banner](https://github.com/aakashmohole/NeuraFlow-Hack2Hire/blob/main/images/NeuraFlow1.png)]([https://www.youtube.com/watch?v=70tGXwfVML0](https://youtu.be/uzBu6GNcnkA))
+[![QuickScribe Banner](https://github.com/aakashmohole/QuickScribe-TextSummarizer/blob/main/images/1.png)]([https://www.youtube.com/watch?v=70tGXwfVML0](https://youtu.be/uzBu6GNcnkA))
 
 ---
 
