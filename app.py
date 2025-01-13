@@ -1,37 +1,33 @@
-from flask import Flask, request, render_template, redirect, url_for
+import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 
-# Load the tokenizer and model
-tokenizer = AutoTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
-model = AutoModelForSeq2SeqLM.from_pretrained("sshleifer/distilbart-cnn-12-6")
+def load_model():
+    """Loads the summarization model."""
+    tokenizer = AutoTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
+    model = AutoModelForSeq2SeqLM.from_pretrained("sshleifer/distilbart-cnn-12-6")
+    summarizer = pipeline("summarization", model=model, tokenizer=tokenizer)
+    return summarizer
 
-# Create the summarization pipeline
-pipe = pipeline("summarization", model=model, tokenizer=tokenizer)
+def main():
+    st.title("Text Summarization App")
+    st.write("Enter some text below, and the app will generate a summary for you!")
 
-app = Flask(__name__)
+    # Text input area
+    text = st.text_area("Enter text to summarize:", height=200)
 
-@app.route('/')
-def landing():
-    # Show the landing page
-    return render_template('landing.html')
-
-@app.route('/index', methods=['POST'])
-def index():
-    summary_text = ''
-    if request.method == 'POST':
-        # Get the text from the form
-        text = request.form.get('text')
-        if not text:
-            summary_text = 'Please enter some text to summarize.'
+    # Button to trigger summarization
+    if st.button("Summarize"):
+        if not text.strip():
+            st.error("Please enter some text to summarize.")
         else:
             try:
+                summarizer = load_model()
                 # Generate the summary
-                summary = pipe(text, max_length=130, min_length=30, do_sample=False)
-                summary_text = summary[0]['summary_text']
+                summary = summarizer(text, max_length=130, min_length=30, do_sample=False)
+                st.subheader("Summary:")
+                st.write(summary[0]['summary_text'])
             except Exception as e:
-                summary_text = f'Error: {str(e)}'
-    
-    return render_template('index.html', summary=summary_text)
+                st.error(f"Error: {str(e)}")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    main()
